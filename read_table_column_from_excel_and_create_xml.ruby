@@ -61,20 +61,20 @@ for i in(0..table_count-1) do
 	sql ='select '
 
 	for j in(column_row_index..last_column_row_index) do
-		column_name = s1.row(j)[0]
-		column = values.add_element("column")
-		column.attributes["name"] = column_name
-		column.text = column_name
+		column_name = "#{s1.row(j)[0]}"
+		if column_name.length!=0
+			column = values.add_element("column")
+			column.attributes["name"] = column_name
+			column.text = column_name
 
-		if j!=last_column_row_index
-			sql=sql+"#{column_name}"+','
-		else
-			sql=sql+"#{column_name}"+' '
-		end	
+			if j!=last_column_row_index
+				sql=sql+"#{column_name}"+','
+			else
+				sql=sql+"#{column_name}"
+			end	
+		end
 	end
-	t ="where SJC > @ts_lastSucc"
-
-	sql="#{sql}#{t.to_s}"
+	sql="#{sql} from #{table_id} where SJC >  @ts_lastSucc"
 
 	source.attributes["sql"] = sql
 end
