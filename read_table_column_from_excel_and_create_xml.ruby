@@ -58,7 +58,7 @@ for i in(0..table_count-1) do
 	key.attributes["name"] = pk_id
 	key.text = pk_id
 
-	sql ='select '
+	sql ="select #{pk_id},"
 
 	for j in(column_row_index..last_column_row_index) do
 		column_name = "#{s1.row(j)[0]}"
